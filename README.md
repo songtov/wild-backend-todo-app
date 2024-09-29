@@ -1,2 +1,1 @@
-# wild-backend-todo-app
-Wild Backend To-do application
+# Wild Backend To-do application
