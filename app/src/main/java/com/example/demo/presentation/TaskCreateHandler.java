@@ -20,7 +20,6 @@ public class TaskCreateHandler extends ResourceMethodHandler {
         // 어떤 형식으로 인풋을 받을 것인가?
         // 일단 , 로 나누가:
 
-        System.out.println("hi handle");
 
         TaskRequestDto taskRequestDto =
                 objectMapper.readValue(content, TaskRequestDto.class);

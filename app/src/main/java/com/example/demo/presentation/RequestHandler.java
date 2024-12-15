@@ -13,11 +13,13 @@ import java.util.Map;
 public class RequestHandler implements HttpHandler {
 
     private final TaskCreateHandler taskCreateHandler = new TaskCreateHandler();
+    private final TaskGetHandler taskGetHandler = new TaskGetHandler();
 
     Map<String, ResourceMethodHandler> handlers = new HashMap<>();
 
     public RequestHandler() {
-        handlers.put(taskCreateHandler.KEY, taskCreateHandler);
+        handlers.put(TaskCreateHandler.KEY, taskCreateHandler);
+        handlers.put(TaskGetHandler.KEY, taskGetHandler);
     }
 
     @Override
