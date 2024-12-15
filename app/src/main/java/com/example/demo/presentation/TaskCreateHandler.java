@@ -1,7 +1,11 @@
 package com.example.demo.presentation;
 
-import com.example.demo.application.Task;
+import com.example.demo.dto.TaskRequestDto;
+import com.example.demo.dto.TaskResponseDto;
+import com.example.demo.infrastructure.Task;
 import com.example.demo.application.TaskCreator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TaskCreateHandler extends ResourceMethodHandler {
 
@@ -9,19 +13,34 @@ public class TaskCreateHandler extends ResourceMethodHandler {
 
     private final TaskCreator taskCreator = new TaskCreator();
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Override
-    public String handle(String content) {
+    public String handle(String content) throws JsonProcessingException {
         // 어떤 형식으로 인풋을 받을 것인가?
         // 일단 , 로 나누가:
 
-        String[] values = content.split(",");
-        // todo_app 같은 경우에는 내부로직이 없는데 어떻게 애플리케이션을 나누는가?
+        System.out.println("hi handle");
 
-        Task task = taskCreator.create(values[0], values[1]);
+        TaskRequestDto taskRequestDto =
+                objectMapper.readValue(content, TaskRequestDto.class);
 
-        String result = task.getTaskName() + " " + task.getTaskDescription();
 
-        return result;
+        System.out.println(taskRequestDto.getTaskDescription());
 
+        Task task = taskCreator.create(
+                taskRequestDto.getTaskName(),
+                taskRequestDto.getTaskDescription()
+        );
+
+        System.out.println(task.getTaskDescription());
+
+
+        return objectMapper.writeValueAsString(
+                new TaskResponseDto(
+                        task.getTaskName(),
+                        task.getTaskDescription()
+                )
+        );
     }
 }
