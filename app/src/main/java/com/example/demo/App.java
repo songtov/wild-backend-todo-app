@@ -1,32 +1,21 @@
 package com.example.demo;
 
-import com.example.demo.presentation.RequestHandler;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 
+@SpringBootApplication
 public class App {
     public static void main(String[] args) throws IOException {
-        App app = new App();
-        app.run();
+        SpringApplication.run(App.class, args);
     }
 
-    private void run() throws IOException {
-        System.out.println("TODO app, Server starts");
-
-        HttpHandler requestHandler = new RequestHandler();
-
-        InetSocketAddress address = new InetSocketAddress(
-                "localhost", 8080
-        );
-
-        HttpServer server = HttpServer.create(address, 0);
-
-        server.createContext("/", requestHandler);
-        server.start();
-
-        System.out.println("Listening on http://localhost:8080");
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
+
 }
