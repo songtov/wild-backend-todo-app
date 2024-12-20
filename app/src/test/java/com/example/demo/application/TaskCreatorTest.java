@@ -38,7 +38,7 @@ class TaskCreatorTest {
     void getTaskList() {
 
         when(taskRepository.getTasks()).thenReturn(List.of(
-                new TaskBuilder().setTaskName("test0").setTaskDescription("test0123").createTask()
+                new Task("test0", "test0123")
         ));
 
         List<Task> tasks = taskCreator.getTasks();
