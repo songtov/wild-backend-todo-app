@@ -20,6 +20,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(TaskController.class)
 class TaskControllerTest {
+    // MockBean 이랑 SpyBean 은 deprecated 되었는데 어떻게 해야되나?
+    //
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -42,7 +45,6 @@ class TaskControllerTest {
                     "taskName": "test1",
                     "taskDescription": "test123"
                 }
-                
                 """;
 
 

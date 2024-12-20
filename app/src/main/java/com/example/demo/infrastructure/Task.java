@@ -1,5 +1,7 @@
 package com.example.demo.infrastructure;
 
+import org.springframework.stereotype.Component;
+
 public class Task {
 
     private String taskName;

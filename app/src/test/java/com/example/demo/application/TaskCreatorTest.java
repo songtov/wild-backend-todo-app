@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -39,7 +38,7 @@ class TaskCreatorTest {
     void getTaskList() {
 
         when(taskRepository.getTasks()).thenReturn(List.of(
-                new Task("test0", "test0123")
+                new TaskBuilder().setTaskName("test0").setTaskDescription("test0123").createTask()
         ));
 
         List<Task> tasks = taskCreator.getTasks();
